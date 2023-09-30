@@ -4,7 +4,7 @@
 <main class="content">
     <div class="container-fluid p-0">
 
-        <h1 class="h3 mb-3">Dashboard Peta Dakwah</h1>
+        <h1 class="h3 mb-3">Dashboard</h1>
 
         {{-- <div class="row">
             <div class="col-xl-6 col-xxl-7">
@@ -22,7 +22,7 @@
             </div>
         </div> --}}
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
                 <div class="card flex-fill w-100">
                     <div class="card-header">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="row">
             <div class="col-12 col-lg-8 col-xxl-9 d-flex">

@@ -97,7 +97,7 @@
 	<!-- Maps -->
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			var map = L.map('world_map', {
+			var map = L.map('peta', {
 				center: [-6.911505531767725, 107.56528992547082],
 				zoom: 14
 			});

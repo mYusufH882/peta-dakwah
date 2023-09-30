@@ -16,8 +16,8 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{Route::is('data-lokasi') ? " active" : "" }}">
-                <a class="sidebar-link" href="{{route('data-lokasi')}}">
+            <li class="sidebar-item {{Route::is('data-lokasi.*') ? " active" : "" }}">
+                <a class="sidebar-link" href="{{route('data-lokasi.index')}}">
                     <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Data Lokasi</span>
                 </a>
             </li>

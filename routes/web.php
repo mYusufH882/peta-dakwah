@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\DataLokasiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ViewMapController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/data-lokasi', [DataController::class, 'index'])->name('data-lokasi');
+    Route::resource('/data-lokasi', DataLokasiController::class);
     Route::get('/peta', [ViewMapController::class, 'index'])->name('peta');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

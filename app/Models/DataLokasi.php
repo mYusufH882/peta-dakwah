@@ -10,7 +10,7 @@ class DataLokasi extends Model
     use HasFactory;
 
     protected $table = "data_lokasi";
-    protected $fillabe = [
+    protected $fillable = [
         'id_user', 'nama_lokasi', 'keterangan', 'alamat', 'latitude', 'longitude'
     ];
 }

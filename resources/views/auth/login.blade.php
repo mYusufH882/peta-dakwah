@@ -21,7 +21,7 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
-                                        <input class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                        <input class="form-control form-control @error('email') is-invalid @enderror"
                                             type="email" name="email" placeholder="Masukkan email" />
                                         @error('email')
                                         <span class="text-danger">Email/Password yang anda masukkan salah!!</span>
@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
-                                        <input class="form-control form-control-lg" type="password" name="password"
+                                        <input class="form-control form-control" type="password" name="password"
                                             placeholder="Masukkan password" />
                                         {{-- <small>
                                             <a href="index.html">Forgot password?</a>

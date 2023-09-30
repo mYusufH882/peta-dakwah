@@ -157,14 +157,19 @@
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                     <img src="{{asset('/adminkit/static/img/avatars/avatar.jpg')}}"
-                        class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles
-                        Hall</span>
+                        class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
+                        class="text-dark">{{Auth::user()->name}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1"
                             data-feather="user"></i> Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                            class="align-middle" data-feather="log-out"></i> Log out</a>
+                    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </li>
         </ul>

@@ -8,7 +8,7 @@
                             Template</strong></a> &copy;
                 </p>
             </div>
-            <div class="col-6 text-end">
+            {{-- <div class="col-6 text-end">
                 <ul class="list-inline">
                     <li class="list-inline-item">
                         <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
@@ -23,7 +23,7 @@
                         <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
 </footer>

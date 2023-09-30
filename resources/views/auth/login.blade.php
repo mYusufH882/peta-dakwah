@@ -17,17 +17,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="m-sm-4">
-                                <form method="POST" action="#">
+                                <form method="POST" action="{{route('loginpost')}}">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
-                                        <input class="form-control form-control-lg" type="email" name="email"
-                                            placeholder="Enter your email" />
+                                        <input class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                            type="email" name="email" placeholder="Masukkan email" />
+                                        @error('email')
+                                        <span class="text-danger">Email/Password yang anda masukkan salah!!</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
                                         <input class="form-control form-control-lg" type="password" name="password"
-                                            placeholder="Enter your password" />
+                                            placeholder="Masukkan password" />
                                         {{-- <small>
                                             <a href="index.html">Forgot password?</a>
                                         </small> --}}

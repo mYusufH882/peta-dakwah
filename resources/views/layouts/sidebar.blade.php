@@ -1,8 +1,9 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="{{route('dashboard')}}">
+        {{-- <a class="sidebar-brand" href="{{route('dashboard')}}">
             {{env('APP_NAME')}}
-        </a>
+        </a> --}}
+        <h1 class="sidebar-brand">{{env('APP_NAME')}}</h1>
 
         <ul class="sidebar-nav">
             <li class="sidebar-header">
@@ -15,9 +16,9 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{Route::is('data-masjid') ? " active" : "" }}">
-                <a class="sidebar-link" href="{{route('data-masjid')}}">
-                    <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Data Masjid</span>
+            <li class="sidebar-item {{Route::is('data-lokasi') ? " active" : "" }}">
+                <a class="sidebar-link" href="{{route('data-lokasi')}}">
+                    <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Data Lokasi</span>
                 </a>
             </li>
 

@@ -8,6 +8,6 @@ class DataController extends Controller
 {
     public function index()
     {
-        return view('data-masjid');
+        return view('data-lokasi');
     }
 }

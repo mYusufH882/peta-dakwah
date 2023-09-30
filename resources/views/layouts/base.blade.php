@@ -33,6 +33,7 @@
 	@yield('login-content')
 	<script src="{{asset('/adminkit/static/js/app.js')}}"></script>
 	@else
+	@auth
 	<div class="wrapper">
 		@include('layouts.sidebar')
 
@@ -133,6 +134,12 @@
 			myLayer.addData(geojson);
 		});
 	</script>
+	@endauth
+	@guest
+	<div class="container mt-5">
+		<h4 class="text-center">Masuk ke halaman <a href="{{route('login')}}">Login</a></h4>
+	</div>
+	@endguest
 	@endif
 
 </body>

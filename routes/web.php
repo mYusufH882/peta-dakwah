@@ -19,12 +19,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/login', [AuthController::class, 'login_view'])->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'login_view'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('loginpost');
+});
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-Route::get('/data-masjid', [DataController::class, 'index'])->name('data-masjid');
-Route::get('/peta', [ViewMapController::class, 'index'])->name('peta');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/data-lokasi', [DataController::class, 'index'])->name('data-lokasi');
+    Route::get('/peta', [ViewMapController::class, 'index'])->name('peta');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});

@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="{{route('dashboard')}}" class="stretched-link">
-            <span class="align-middle">{{env('APP_NAME')}}</span>
+        <a class="sidebar-brand" href="{{route('dashboard')}}">
+            {{env('APP_NAME')}}
         </a>
 
         <ul class="sidebar-nav">

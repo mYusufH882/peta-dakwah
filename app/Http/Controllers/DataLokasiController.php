@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
 
 class DataLokasiController extends Controller
 {
@@ -13,8 +14,19 @@ class DataLokasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $lokasi = DataLokasi::get();
+            return DataTables::of($lokasi)
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($row) {
+                    $actionBtn = '<a href="' . route('data-lokasi.edit', $row->id) . '" class="edit btn btn-warning text-light btn-sm">Ubah</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="' . $row->id . '">Hapus</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
         return view('lokasi.data-lokasi');
     }
 
@@ -25,7 +37,7 @@ class DataLokasiController extends Controller
      */
     public function create()
     {
-        return view('lokasi.tambah');
+        return view('lokasi.tambah-lokasi');
     }
 
     /**
@@ -75,7 +87,9 @@ class DataLokasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lokasi = DataLokasi::find($id);
+
+        return view('lokasi.edit-lokasi', compact('lokasi'));
     }
 
     /**
@@ -98,6 +112,13 @@ class DataLokasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $lokasi = DataLokasi::find($id);
+            $lokasi->delete();
+
+            return response()->json(['success' => 'Data berhasil dihapus'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => 'Terjadi kesalahan saat menghapus data'], 500);
+        }
     }
 }

@@ -21,7 +21,6 @@
                                 var map = L.map('peta');
                                 map.setView([{{env('LATITUDE')}}, {{env('LONGITUDE')}}], 16);
                                 map.locate({setView: true, maxZoom: 16})
-                                L.marker([{{env('LATITUDE')}}, {{env('LONGITUDE')}}]).addTo(map);
                                 
                                 //GMaps
                                 L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -68,6 +67,7 @@
                                 <label for="keterangan">Keterangan</label>
                                 <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                             </div>
+                            <a href="{{route('data-lokasi.index')}}" class="btn btn-sm btn-primary">Kembali</a>
                             <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
                         </form>
                     </div>

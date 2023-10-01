@@ -18,7 +18,7 @@
 
                     <script>
                         var map = L.map('map', {
-                            center: [-6.911505531767725, 107.56528992547082],
+                            center: [{{env('LATITUDE')}}, {{env('LONGITUDE')}}],
                             zoom: 14
                         });
 

@@ -8,9 +8,11 @@
                 <div class="d-table-cell align-middle">
 
                     <div class="text-center mt-4">
-                        <h1 class="h2">Halaman Login</h1>
+                        <img src="{{asset('/data/images/logopemudapersis.jpeg')}}" alt="Christina Mason"
+                            class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                        <h1 class="h2">Peta Dakwah PJ Pemuda Persis Cibeureum</h1>
                         <p class="lead">
-                            Selamat datang!!! di dashboard Dakwah Info PJ Pemuda Persis Cibeureum
+                            Selamat datang!!! Silahkan Login.
                         </p>
                     </div>
 
@@ -44,8 +46,8 @@
                                             </span>
                                         </label>
                                     </div> --}}
-                                    <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-sm btn-md btn-primary">Sign in</button>
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-md btn-primary">Sign in</button>
                                     </div>
                                 </form>
                             </div>

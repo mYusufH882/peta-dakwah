@@ -11,6 +11,6 @@ class DataLokasi extends Model
 
     protected $table = "data_lokasi";
     protected $fillable = [
-        'id_user', 'nama_lokasi', 'keterangan', 'alamat', 'latitude', 'longitude'
+        'id_user', 'nama_lokasi', 'keterangan', 'alamat', 'latitude', 'longitude', 'gambar_lokasi'
     ];
 }

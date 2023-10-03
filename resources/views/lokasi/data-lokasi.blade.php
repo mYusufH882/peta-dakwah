@@ -30,6 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Gambar</th>
                                         <th>Nama Lokasi</th>
                                         <th>Alamat</th>
                                         <th>Latitude</th>
@@ -49,6 +50,7 @@
                                     ajax: "{{ route('data-lokasi.index') }}",
                                     columns: [
                                         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                                        {data: 'gambar', name: 'gambar'},
                                         {data: 'nama_lokasi', name: 'nama_lokasi'},
                                         {data: 'alamat', name: 'alamat'},
                                         {data: 'latitude', name: 'latitude'},

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Yajra\Datatables\Datatables;
 
 class DataLokasiController extends Controller
@@ -17,14 +18,18 @@ class DataLokasiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $lokasi = DataLokasi::get();
+            $lokasi = DataLokasi::where('id_user', Auth::user()->id)->get();
             return DataTables::of($lokasi)
                 ->addIndexColumn()
+                ->addColumn('gambar', function ($row) {
+                    $image = ($row->gambar_lokasi) ? "<img src=" . asset('lokasi/' . $row->gambar_lokasi) . " style='width:160px;'>" : "Belum tersedia!!!";
+                    return $image;
+                })
                 ->addColumn('aksi', function ($row) {
                     $actionBtn = '<a href="' . route('data-lokasi.edit', $row->id) . '" class="edit btn btn-warning text-light btn-sm">Ubah</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="' . $row->id . '">Hapus</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['aksi'])
+                ->rawColumns(['gambar', 'aksi'])
                 ->make(true);
         }
         return view('lokasi.data-lokasi');
@@ -48,6 +53,7 @@ class DataLokasiController extends Controller
      */
     public function store(Request $request)
     {
+        $lokasi = new DataLokasi();
         $request->validate([
             'nama_lokasi' => 'required',
             'keterangan' => 'required',
@@ -56,14 +62,24 @@ class DataLokasiController extends Controller
             'longitude' => 'required'
         ]);
 
-        DataLokasi::create([
-            'id_user' => Auth::user()->id,
-            'nama_lokasi' => $request->nama_lokasi,
-            'keterangan' => $request->keterangan,
-            'alamat' => $request->alamat,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude
-        ]);
+        $lokasi->id_user = Auth::user()->id;
+        $lokasi->nama_lokasi = $request->nama_lokasi;
+        $lokasi->keterangan = $request->keterangan;
+        $lokasi->alamat = $request->alamat;
+        $lokasi->latitude = $request->latitude;
+        $lokasi->longitude = $request->longitude;
+
+        if ($request->hasFile('gambar_lokasi')) {
+            $request->validate([
+                'gambar_lokasi' => 'image|mimes:jpg,png,jpeg|max:2048'
+            ]);
+
+            $namaGambar = $request->file('gambar_lokasi')->getClientOriginalName();
+            $request->gambar_lokasi->move(public_path('lokasi'), $namaGambar);
+        }
+
+        $lokasi->gambar_lokasi = ($request->hasFile('gambar_lokasi')) ? $namaGambar : "";
+        $lokasi->save();
 
         return redirect()->route('data-lokasi.index')->with('success', 'Data Lokasi Berhasil Ditambahkan!!!');
     }
@@ -103,14 +119,28 @@ class DataLokasiController extends Controller
     {
         $lokasi = DataLokasi::find($id);
 
-        $lokasi->update([
-            'id_user' => Auth::user()->id,
-            'nama_lokasi' => $request->nama_lokasi,
-            'keterangan' => $request->keterangan,
-            'alamat' => $request->alamat,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude
-        ]);
+        $lokasi->id_user = Auth::user()->id;
+        $lokasi->nama_lokasi = $request->nama_lokasi;
+        $lokasi->keterangan = $request->keterangan;
+        $lokasi->alamat = $request->alamat;
+        $lokasi->latitude = $request->latitude;
+        $lokasi->longitude = $request->longitude;
+
+        if ($request->hasFile('gambar_lokasi')) {
+            $request->validate([
+                'gambar_lokasi' => 'image|mimes:jpg,png,jpeg|max:2048'
+            ]);
+
+            if ($lokasi->gambar_lokasi) {
+                unlink(public_path('lokasi') . '/' . $lokasi->gambar_lokasi);
+            }
+
+            $namaGambar = $request->file('gambar_lokasi')->getClientOriginalName();
+            $request->gambar_lokasi->move(public_path('lokasi'), $namaGambar);
+        }
+
+        $lokasi->gambar_lokasi = ($request->hasFile('gambar_lokasi')) ? $namaGambar : "";
+        $lokasi->save();
 
         return redirect()->route('data-lokasi.index')->with('success', 'Data Lokasi Berhasil Diubah!!!');
     }
@@ -125,6 +155,7 @@ class DataLokasiController extends Controller
     {
         try {
             $lokasi = DataLokasi::find($id);
+            unlink(public_path('lokasi') . '/' . $lokasi->gambar_lokasi);
             $lokasi->delete();
 
             return response()->json(['success' => 'Data berhasil dihapus'], 200);

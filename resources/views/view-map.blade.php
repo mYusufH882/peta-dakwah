@@ -49,7 +49,7 @@
 
                                     data.forEach(function(item) {
                                         //Marker Place 
-                                        var gambar = "<img src='data/images/al-furqan.jpg' style='width:210px;'>";
+                                        var gambar = (item.gambar_lokasi) ? "<img src='data/images/"+item.gambar_lokasi+"' class='mx-auto d-block' style='width:210px;'>" : "<small>Gambar belum tersedia!!!</small>";
                                         var tempat = L.marker([item.latitude, item.longitude]).addTo(map)
                                             .bindPopup(item.nama_lokasi + "<br>" + gambar);
                                         L.layerGroup([tempat]);

@@ -68,6 +68,14 @@
                                 <input type="text" name="nama_lokasi" id="nama_lokasi" class="form-control"
                                     value="{{$lokasi->nama_lokasi}}">
                             </div>
+                            @if ($lokasi->gambar_lokasi)
+                            <div class="mb-3">
+                                <img src="{{asset('lokasi/'.$lokasi->gambar_lokasi)}}" alt="Gambar Lokasi"
+                                    style="height: 150px;">
+                            </div>
+                            @else
+                            <span class="text-warning">Gambar tidak tersedia!!! Tambahkan gambar.</span>
+                            @endif
                             <div class="mb-3">
                                 <label for="gambar">Gambar Lokasi</label>
                                 <input type="file" name="gambar_lokasi" id="gambar_lokasi" class="form-control">

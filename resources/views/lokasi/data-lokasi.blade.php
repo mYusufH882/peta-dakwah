@@ -38,12 +38,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                 </tbody>
                             </table>
                             <script type="text/javascript">
                                 $(function() {
                                 var table = $("#tableLokasi").DataTable({
+                                    responsive: true,
                                     processing: true,
                                     serverSide: true,
                                     ajax: "{{ route('data-lokasi.index') }}",

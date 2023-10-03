@@ -101,7 +101,18 @@ class DataLokasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lokasi = DataLokasi::find($id);
+
+        $lokasi->update([
+            'id_user' => Auth::user()->id,
+            'nama_lokasi' => $request->nama_lokasi,
+            'keterangan' => $request->keterangan,
+            'alamat' => $request->alamat,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude
+        ]);
+
+        return redirect()->route('data-lokasi.index')->with('success', 'Data Lokasi Berhasil Diubah!!!');
     }
 
     /**

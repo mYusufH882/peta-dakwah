@@ -13,18 +13,18 @@
                         <h5 class="card-title mb-0 text-center">Input Data Lokasi</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('data-lokasi.store')}}" method="POST">
+                        <form action="{{route('data-lokasi.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div id="peta" style="height: 350px;" class="mb-3"></div>
                             <script type="text/javascript">
                                 var map = L.map('peta');
-                                map.setView([{{env('LATITUDE')}}, {{env('LONGITUDE')}}], 16);
-                                map.locate({setView: true, maxZoom: 16})
+                                map.setView([{{env('LATITUDE')}}, {{env('LONGITUDE')}}], 14);
+                                map.locate({setView: true, maxZoom: 20})
                                 
                                 //GMaps
                                 L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                                    maxZoom: 18,
+                                    maxZoom: 20,
                                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
                                 }).addTo(map);
 
@@ -60,6 +60,10 @@
                                 <input type="text" name="nama_lokasi" id="nama_lokasi" class="form-control">
                             </div>
                             <div class="mb-3">
+                                <label for="gambar">Gambar Lokasi</label>
+                                <input type="file" name="gambar_lokasi" id="gambar_lokasi" class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <label for="alamat">Alamat</label>
                                 <textarea name="alamat" id="alamat" class="form-control"></textarea>
                             </div>
@@ -68,7 +72,7 @@
                                 <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                             </div>
                             <a href="{{route('data-lokasi.index')}}" class="btn btn-sm btn-primary">Kembali</a>
-                            <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-sm btn-success">Simpan</button>
                         </form>
                     </div>
                 </div>

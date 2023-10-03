@@ -16,42 +16,50 @@
                         <div id="map" style="height: 500px;"></div>
                     </div>
 
-                    <script>
-                        var map = L.map('map', {
-                            center: [{{env('LATITUDE')}}, {{env('LONGITUDE')}}],
-                            zoom: 14
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $.ajax({
+                                url: "/get-lokasi",
+                                method: "GET",
+                                dataType: "json",
+                                success: function(data) {
+                                    var map = L.map('map');
+                                    map.setView([{{env('LATITUDE')}}, {{env('LONGITUDE')}}], 16);
+            
+                                    //GMaps
+                                    L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                                        maxZoom: 20,
+                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                                    }).addTo(map);
+
+                                    //Open Street Map
+                                    // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                    //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                                    // }).addTo(map);
+
+                                    //Event Click
+                                    map.on('click', function (e) {
+                                        L.popup().setLatLng(e.latlng)
+                                            .setContent("Titik Koordinat : " + e.latlng.toString())
+                                            .openOn(map);
+                                    });
+
+                                    var myLayer = L.geoJSON().addTo(map);
+                                        myLayer.addData(geojson);
+
+                                    data.forEach(function(item) {
+                                        //Marker Place 
+                                        var gambar = "<img src='data/images/al-furqan.jpg' style='width:210px;'>";
+                                        var tempat = L.marker([item.latitude, item.longitude]).addTo(map)
+                                            .bindPopup(item.nama_lokasi + "<br>" + gambar);
+                                        L.layerGroup([tempat]);
+                                    });
+                                },
+                                error: function(error) {
+                                    console.error("Terjadi kesalahan saat mengambil data: " + error);
+                                }
+                            });
                         });
-
-                        //GMaps
-                        L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                            maxZoom: 20,
-                            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                        }).addTo(map);
-
-                        //Open Street Map
-                        // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                        // }).addTo(map);
-
-                        //Event Click
-                        map.on('click', function (e) {
-                            L.popup().setLatLng(e.latlng)
-                                .setContent("Titik Koordinat : " + e.latlng.toString())
-                                .openOn(map);
-                        });
-
-                        //Marker Place 
-                        var gambar1 = "<img src='data/images/al-furqan.jpg' style='width:210px;'>";
-                        var alfurqan = L.marker([-6.911661, 107.565236]).addTo(map)
-                            .bindPopup('<p>Masjid Al-Furqan Karang Sari<br>' + gambar1 + '</p>');
-
-                        var almanar = L.marker([-6.90944, 107.565311]).addTo(map)
-                            .bindPopup('Masjid Al-Mannar Langen Sari');
-
-                        L.layerGroup([alfurqan, almanar]);
-
-                        var myLayer = L.geoJSON().addTo(map);
-                        myLayer.addData(geojson);
                     </script>
                 </div>
             </div>

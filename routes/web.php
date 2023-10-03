@@ -30,8 +30,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/get-lokasi', [ViewMapController::class, 'getMarkLokasi']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::resource('/data-lokasi', DataLokasiController::class);
     Route::get('/peta', [ViewMapController::class, 'index'])->name('peta');
+    Route::put('/update-profile/{id}', [ProfileController::class, 'updateProfil'])->name('updateProfile');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

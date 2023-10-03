@@ -14,20 +14,32 @@
                         <h5 class="card-title mb-0 text-center">Profile Details</h5>
                     </div>
                     <div class="card-body h-100">
+                        @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            <span class="text-bold">{{Session::get('success')}}</span>
+                        </div>
+                        @endif
                         <div class="container text-center">
                             <img src="{{asset('/adminkit/static/img/avatars/avatar.jpg')}}" alt="Christina Mason"
                                 class="img-fluid rounded-circle mb-2" width="128" height="128" />
-                            <h5 class="card-title mb-0">{{Auth::user()->name}}</h5>
+                            <h5 class="card-title mb-0">{{ucfirst(Auth::user()->nama_lengkap)}}</h5>
                         </div>
 
-                        <form action="#" method="POST" class="mt-3">
+                        <form action="{{route('updateProfile', Auth::user()->id)}}" method="POST" class="mt-3">
                             @csrf
                             @method('PUT')
                             <div class="form-group mb-3">
-                                <input type="text" id="username" class="form-control" value="{{Auth::user()->name}}"
-                                    placeholder="Username">
+                                <label for="username" class="mb-auto"><b>Username :</b></label>
+                                <input type="text" name="name" id="username" class="form-control"
+                                    value="{{Auth::user()->name}}" placeholder="Username">
                             </div>
                             <div class="form-group mb-3">
+                                <label for="nama_lengkap" class="mb-auto"><b>Nama Lengkap :</b></label>
+                                <input type="text" name="nama_lengkap" class="form-control"
+                                    value="{{Auth::user()->nama_lengkap}}" placeholder="Nama Lengkap">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="email" class="mb-auto"><b>Email :</b></label>
                                 <input type="email" id="email" class="form-control" value="{{Auth::user()->email}}"
                                     placeholder="Email" readonly>
                             </div>

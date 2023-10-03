@@ -4,16 +4,17 @@
 <main class="content">
     <div class="container-fluid p-0">
         <div class="mb-3">
-            <h1 class="h3 d-inline align-middle">Form Tambah Data Lokasi</h1>
+            <h1 class="h3 d-inline align-middle">Ubah Lokasi {{ucfirst($lokasi->nama_lokasi)}}</h1>
         </div>
         <div class="row">
             <div class="col-md col-xl">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0 text-center">Input Data Lokasi</h5>
+                        <h5 class="card-title mb-0 text-center">Ubah Data Lokasi</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('data-lokasi.update', $lokasi->id)}}" method="POST">
+                        <form action="{{route('data-lokasi.update', $lokasi->id)}}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -23,13 +24,13 @@
                                 var lat = '{{$lokasi->latitude}}';
                                 var lng = '{{$lokasi->longitude}}';
 
-                                map.setView([{{env('LATITUDE')}}, {{env('LONGITUDE')}}], 16);
-                                map.locate({setView: true, maxZoom: 16})
+                                map.setView([lat, lng], 20);
+                                map.locate({setView: true, maxZoom: 20})
                                 L.marker([lat, lng]).addTo(map);
 
                                 //GMaps
                                 L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                                    maxZoom: 18,
+                                    maxZoom: 20,
                                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
                                 }).addTo(map);
 
@@ -66,6 +67,10 @@
                                 <label for="nama_lokasi">Nama Lokasi</label>
                                 <input type="text" name="nama_lokasi" id="nama_lokasi" class="form-control"
                                     value="{{$lokasi->nama_lokasi}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gambar">Gambar Lokasi</label>
+                                <input type="file" name="gambar_lokasi" id="gambar_lokasi" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="alamat">Alamat</label>

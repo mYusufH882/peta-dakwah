@@ -20,11 +20,11 @@
                                 <form method="POST" action="{{route('loginpost')}}">
                                     @csrf
                                     <div class="mb-3">
-                                        <label class="form-label">Email</label>
-                                        <input class="form-control form-control @error('email') is-invalid @enderror"
-                                            type="email" name="email" placeholder="Masukkan email" />
-                                        @error('email')
-                                        <span class="text-danger">Email/Password yang anda masukkan salah!!</span>
+                                        <label class="form-label">Username</label>
+                                        <input class="form-control form-control @error('username') is-invalid @enderror"
+                                            type="text" name="name" placeholder="Masukkan Username" />
+                                        @error('username')
+                                        <span class="text-danger">Username/Password yang anda masukkan salah!!</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -45,7 +45,7 @@
                                         </label>
                                     </div> --}}
                                     <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+                                        <button type="submit" class="btn btn-sm btn-md btn-primary">Sign in</button>
                                     </div>
                                 </form>
                             </div>

@@ -1,2 +1,3 @@
 1. Buat CRUD untuk anggota
 2. Menampilkan anggota pada maps dan bersanding dengan lokasi serta bedakan ikonnya
+2.1 Gabungkan array anggota dengan lokasi

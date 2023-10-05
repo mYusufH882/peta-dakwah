@@ -4,13 +4,13 @@
 <main class="content">
     <div class="container-fluid p-0">
         <div class="mb-3">
-            <h1 class="h3 d-inline align-middle">Data Masjid</h1>
+            <h1 class="h3 d-inline align-middle">Data Anggota</h1>
         </div>
         <div class="row">
             <div class="col-md col-xl">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0 text-center">Data Masjid</h5>
+                        <h5 class="card-title mb-0 text-center">Data Anggota</h5>
                     </div>
                     <div class="card-body">
                         @if (Session::has('success'))
@@ -23,18 +23,18 @@
                         </div>
 
                         <div class="table-responsive">
-                            <a href="{{route('data-lokasi.create')}}" class="btn btn-sm btn-success mb-3"><i
+                            <a href="{{route('data-anggota.create')}}" class="btn btn-sm btn-success mb-3"><i
                                     class="align-middle" data-feather="plus"></i>
-                                <span class="align-middle">Tambah Data Lokasi</span></a>
-                            <table class="table table-bordered table-striped" id="tableLokasi">
+                                <span class="align-middle">Tambah Data Anggota</span></a>
+                            <table class="table table-bordered table-striped" id="tableAnggota">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Gambar</th>
-                                        <th>Nama Lokasi</th>
+                                        <th>Foto</th>
+                                        <th>Nama</th>
                                         <th>Alamat</th>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
+                                        <th>Tipe Anggota</th>
+                                        <th>Jabatan Anggota</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -43,15 +43,15 @@
                             </table>
                             <script type="text/javascript">
                                 $(function() {
-                                var table = $("#tableLokasi").DataTable({
+                                var table = $("#tableAnggota").DataTable({
                                     responsive: true,
                                     processing: true,
                                     serverSide: true,
-                                    ajax: "{{ route('data-lokasi.index') }}",
+                                    ajax: "{{ route('data-anggota.index') }}",
                                     columns: [
                                         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                                        {data: 'gambar', name: 'gambar'},
-                                        {data: 'nama_lokasi', name: 'nama_lokasi'},
+                                        {data: 'foto', name: 'foto'},
+                                        {data: 'nama', name: 'nama'},
                                         {data: 'alamat', name: 'alamat'},
                                         {data: 'latitude', name: 'latitude'},
                                         {data: 'longitude', name: 'longitude'},
@@ -66,7 +66,7 @@
 
                                 $(document).on('click', '.delete', function() {
                                     var id = $(this).data('id');
-                                    var url = '{{ route('data-lokasi.destroy', ':id') }}';
+                                    var url = '{{ route('data-anggota.destroy', ':id') }}';
                                     url = url.replace(':id', id);
                                     var csrfToken = $('meta[name="csrf-token"]').attr('content');
                                     

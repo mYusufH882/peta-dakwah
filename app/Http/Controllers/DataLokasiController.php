@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DataLokasi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\URL;
 use Yajra\Datatables\Datatables;
 
 class DataLokasiController extends Controller
@@ -18,7 +16,7 @@ class DataLokasiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $lokasi = DataLokasi::where('id_user', Auth::user()->id)->get();
+            $lokasi = DataLokasi::get();
             return DataTables::of($lokasi)
                 ->addIndexColumn()
                 ->addColumn('gambar', function ($row) {
@@ -62,7 +60,6 @@ class DataLokasiController extends Controller
             'longitude' => 'required'
         ]);
 
-        $lokasi->id_user = Auth::user()->id;
         $lokasi->nama_lokasi = $request->nama_lokasi;
         $lokasi->keterangan = $request->keterangan;
         $lokasi->alamat = $request->alamat;
@@ -119,7 +116,6 @@ class DataLokasiController extends Controller
     {
         $lokasi = DataLokasi::find($id);
 
-        $lokasi->id_user = Auth::user()->id;
         $lokasi->nama_lokasi = $request->nama_lokasi;
         $lokasi->keterangan = $request->keterangan;
         $lokasi->alamat = $request->alamat;

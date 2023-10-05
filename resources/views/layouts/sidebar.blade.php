@@ -22,6 +22,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{Route::is('data-anggota.*') ? " active" : "" }}">
+                <a class="sidebar-link" href="{{route('data-anggota.index')}}">
+                    <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Anggota</span>
+                </a>
+            </li>
+
             <li class="sidebar-item {{Route::is('peta') ? " active" : "" }}">
                 <a class="sidebar-link" href="{{route('peta')}}">
                     <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>

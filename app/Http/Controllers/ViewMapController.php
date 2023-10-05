@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataLokasi;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ViewMapController extends Controller
 {
@@ -15,7 +14,9 @@ class ViewMapController extends Controller
 
     public function getMarkLokasi()
     {
-        $lokasi = DataLokasi::where('id_user', Auth::user()->id)->get()->toArray();
+        $lokasi = DataLokasi::all();
+        // $anggota = User::where('id', '!=', 1)->get()->toArray();
+
         return response()->json($lokasi);
     }
 }

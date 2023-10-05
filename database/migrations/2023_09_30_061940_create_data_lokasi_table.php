@@ -15,7 +15,6 @@ class CreateDataLokasiTable extends Migration
     {
         Schema::create('data_lokasi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('id_user');
             $table->string('nama_lokasi');
             $table->text('keterangan');
             $table->text('alamat');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-lokasi', [ViewMapController::class, 'getMarkLokasi']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::resource('/data-lokasi', DataLokasiController::class);
+    Route::resource('/data-anggota', AnggotaController::class);
     Route::get('/peta', [ViewMapController::class, 'index'])->name('peta');
     Route::put('/update-profile/{id}', [ProfileController::class, 'updateProfil'])->name('updateProfile');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

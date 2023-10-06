@@ -33,7 +33,7 @@ class UserDetail extends Model
         'pimpinan_jamaah'
     ];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'id_user', 'id');
     }

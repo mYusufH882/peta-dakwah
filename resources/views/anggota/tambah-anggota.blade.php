@@ -20,7 +20,12 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="nama_lengkap">Nama Lengkap</label>
-                                        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control">
+                                        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control @error('nama_lengkap')
+                                            is-invalid
+                                        @enderror">
+                                        @error('nama_lengkap')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="avatar">Foto Profil</label>
@@ -32,7 +37,12 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="alamat">Alamat</label>
-                                        <textarea name="alamat" id="alamat" class="form-control"></textarea>
+                                        <textarea name="alamat" id="alamat" class="form-control @error('alamat')
+                                            is-invalid
+                                        @enderror"></textarea>
+                                        @error('alamat')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <div class="row">

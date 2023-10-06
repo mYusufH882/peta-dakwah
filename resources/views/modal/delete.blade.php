@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <span class="text-bold">Apakah anda yakin ingin menghapus data lokasi ini?</span>
+                <span class="text-bold">Apakah anda yakin ingin menghapus data ini?</span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

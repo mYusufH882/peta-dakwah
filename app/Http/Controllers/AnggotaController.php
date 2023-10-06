@@ -22,7 +22,7 @@ class AnggotaController extends Controller
             return DataTables::of($anggota)
                 ->addIndexColumn()
                 ->addColumn('foto', function ($row) {
-                    $image = ($row->user->avatar) ? "<img src=" . asset('user/' . $row->user->avatar) . " style='width:160px;'>" : "Belum tersedia!!!";
+                    $image = ($row->user->avatar != null) ? "<img src=" . asset('foto/' . $row->user->avatar) . " style='width:160px;'>" : "Belum tersedia!!!";
                     return $image;
                 })
                 ->addColumn('nama', function ($row) {
@@ -59,7 +59,52 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required',
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $request->validate([
+                'avatar' => 'image|mimes:jpg,png,jpeg|max:2048'
+            ]);
+
+            $namaGambar = $request->file('avatar')->getClientOriginalName();
+            $request->avatar->move(public_path('foto'), $namaGambar);
+        }
+
+        $user = User::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'name' => strtolower(trim($request->nama_lengkap)),
+            'email' => $request->email,
+            'avatar' => ($request->hasFile('avatar')) ? $namaGambar : '',
+            'password' => bcrypt('12345678')
+        ]);
+
+        UserDetail::create([
+            'id_user' => $user->id,
+            'id_lokasi' => $request->lokasi,
+            'tipe_anggota' => $request->tipe_anggota,
+            'jabatan_anggota' => $request->jabatan_anggota,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
+            'no_telp' => $request->no_telp,
+            'status' => $request->status,
+            'alamat' => $request->alamat,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'npa' => $request->npa,
+            'profesi' => $request->profesi,
+            'pendaftaran_anggota' => $request->pendaftaran_anggota,
+            'masa_aktif_kta' => $request->masa_aktif_kta,
+            'pimpinan_wilayah' => $request->pimpinan_wilayah,
+            'pimpinan_daerah' => $request->pimpinan_daerah,
+            'pimpinan_cabang' => $request->pimpinan_cabang,
+            'pimpinan_jamaah' => $request->pimpinan_jamaah
+        ]);
+
+        return redirect()->route('data-anggota.index')->with('success', 'Data Berhasil Ditambahkan !!!');
     }
 
     /**
@@ -81,8 +126,10 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-        $anggota = User::find($id);
-        return view('anggota.edit-anggota', compact('anggota'));
+        $anggota = UserDetail::find($id);
+        $lokasi = DataLokasi::get();
+
+        return view('anggota.edit-anggota', compact('anggota', 'lokasi'));
     }
 
     /**
@@ -94,7 +141,59 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required',
+        ]);
+
+        $user = User::find($id);
+        $anggota = UserDetail::where('id_user', $id)->first();
+
+        if ($request->hasFile('avatar')) {
+            $request->validate([
+                'avatar' => 'image|mimes:jpg,png,jpeg|max:2048'
+            ]);
+
+            if ($user->avatar) {
+                unlink(public_path('foto') . '/' . $user->avatar);
+            }
+
+            $namaGambar = $request->file('avatar')->getClientOriginalName();
+            $request->avatar->move(public_path('foto'), $namaGambar);
+        }
+
+        $user->update([
+            'nama_lengkap' => $request->nama_lengkap,
+            'name' => strtolower(trim($request->nama_lengkap)),
+            'email' => $request->email,
+            'avatar' => ($request->hasFile('avatar')) ? $namaGambar : '',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $anggota->update([
+            'id_user' => $user->id,
+            'id_lokasi' => $request->lokasi,
+            'tipe_anggota' => $request->tipe_anggota,
+            'jabatan_anggota' => $request->jabatan_anggota,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
+            'no_telp' => $request->no_telp,
+            'status' => $request->status,
+            'alamat' => $request->alamat,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'npa' => $request->npa,
+            'profesi' => $request->profesi,
+            'pendaftaran_anggota' => $request->pendaftaran_anggota,
+            'masa_aktif_kta' => $request->masa_aktif_kta,
+            'pimpinan_wilayah' => $request->pimpinan_wilayah,
+            'pimpinan_daerah' => $request->pimpinan_daerah,
+            'pimpinan_cabang' => $request->pimpinan_cabang,
+            'pimpinan_jamaah' => $request->pimpinan_jamaah
+        ]);
+
+        return redirect()->route('data-anggota.index')->with('success', 'Data Berhasil Diubah !!!');
     }
 
     /**
@@ -105,6 +204,17 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $anggota = UserDetail::find($id);
+            $user = User::where('id', $anggota->id_user)->first();
+
+            unlink(public_path('foto') . '/' . $user->avatar);
+            $user->delete();
+            $anggota->delete();
+
+            return response()->json(['success' => 'Data berhasil dihapus'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => 'Terjadi kesalahan saat menghapus data: ' . $th], 500);
+        }
     }
 }

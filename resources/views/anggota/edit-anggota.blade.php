@@ -85,9 +85,9 @@
                                     <div id="peta" style="height: 650px;" class="mb-3"></div>
                                     <script type="text/javascript">
                                         var map = L.map('peta');
-                                        var lat = '{{$anggota->latitude}}';
-                                        var lng = '{{$anggota->longitude}}';
-
+                                        var lat = '{{($anggota->latitude != 0) ? $anggota->latitude : env('LATITUDE')}}';
+                                        var lng = '{{($anggota->longitude != 0) ? $anggota->longitude : env('LONGITUDE')}}';
+console.log(lat)
                                         map.setView([lat, lng], 16);
                                         map.locate({setView: true, maxZoom: 20});
                                         L.marker([lat, lng]).addTo(map);

@@ -21,6 +21,10 @@ class AnggotaController extends Controller
             $anggota = UserDetail::get();
             return DataTables::of($anggota)
                 ->addIndexColumn()
+                ->addColumn('tipe', function ($row) {
+                    $tipe = ucfirst($row->tipe_anggota);
+                    return $tipe;
+                })
                 ->addColumn('foto', function ($row) {
                     $image = ($row->user->avatar != null) ? "<img src=" . asset('foto/' . $row->user->avatar) . " style='width:160px;'>" : "Belum tersedia!!!";
                     return $image;

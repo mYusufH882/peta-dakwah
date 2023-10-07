@@ -41,15 +41,18 @@
                 <div class="card flex-fill">
                     <div class="card-header">
 
-                        <h5 class="card-title mb-0">Data Lokasi</h5>
+                        <h5 class="card-title mb-0">Data anggota</h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover my-0" id="tableDashboard">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Lokasi</th>
+                                    <th>Nama Anggota</th>
+                                    <th>Titik Lokasi</th>
                                     <th>Alamat</th>
+                                    <th>Tipe</th>
+                                    <th>Jabatan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -58,13 +61,17 @@
                         </table>
                         <script type="text/javascript">
                             $("#tableDashboard").DataTable({
+                                pageLength : 3,
                                 processing: true,
                                 serverSide: true,
                                 ajax: "{{ url('/dashboard') }}",
                                 columns: [
                                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                                    {data: 'nama_lokasi', name: 'nama_lokasi'},
+                                    {data: 'nama_lengkap', name: 'nama_lengkap'},
+                                    {data: 'titik_lokasi', name: 'titik_lokasi'},
                                     {data: 'alamat', name: 'alamat'},
+                                    {data: 'tipe', name: 'tipe'},
+                                    {data: 'jabatan_anggota', name: 'jabatan_anggota'},
                                     {
                                         data: 'aksi',
                                         name: 'aksi',
@@ -77,11 +84,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 col-xxl-3 d-flex">
+            <div class="col-12 col-lg-4 col-xxl-3">
                 <div class="card flex-fill w-100">
                     <div class="card-header">
 
-                        <h5 class="card-title mb-0">Grafik Perkembangan Wilayah</h5>
+                        <h5 class="card-title mb-0">Grafik Anggota PJ Cibeureum</h5>
                     </div>
                     <div class="card-body d-flex w-100">
                         <div class="align-self-center chart chart-lg">

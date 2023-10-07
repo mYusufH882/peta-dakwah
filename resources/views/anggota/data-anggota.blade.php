@@ -53,7 +53,7 @@
                                         {data: 'foto', name: 'foto'},
                                         {data: 'nama', name: 'nama'},
                                         {data: 'alamat', name: 'alamat'},
-                                        {data: 'tipe_anggota', name: 'tipe_anggota'},
+                                        {data: 'tipe', name: 'tipe'},
                                         {data: 'jabatan_anggota', name: 'jabatan_anggota'},
                                         {
                                             data: 'aksi',

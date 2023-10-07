@@ -47,10 +47,15 @@
                                     var myLayer = L.geoJSON().addTo(map);
                                         myLayer.addData(geojson);
 
+                                    var memberIcon = L.icon({
+                                        iconUrl: '/data/images/location.png',
+                                        iconSize:     [40, 50], // size of the icon
+                                    });
+
                                     data.forEach(function(item) {
                                         //Marker Members
                                         var gambar = (item.user.avatar) ? "<img src='data/foto/"+item.user.avatar+"' class='mx-auto d-block' style='width:210px;'>" : "<small>Gambar belum tersedia!!!</small>";
-                                        var anggota = L.marker([item.latitude, item.longitude]).addTo(map)
+                                        var anggota = L.marker([item.latitude, item.longitude], {icon: memberIcon}).addTo(map)
                                             .bindPopup(item.user.nama_lengkap + "<br>" + gambar);
                                         L.layerGroup([anggota]);
                                     });

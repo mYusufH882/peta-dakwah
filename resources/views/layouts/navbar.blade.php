@@ -156,7 +156,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="{{asset('/adminkit/static/img/avatars/avatar.jpg')}}"
+                    <img src="{{(Auth::user()->avatar) ? asset('foto/'.Auth::user()->avatar) : asset('/adminkit/static/img/avatars/avatar.jpg')}}"
                         class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span
                         class="text-dark">{{ucfirst(Auth::user()->nama_lengkap)}}</span>
                 </a>

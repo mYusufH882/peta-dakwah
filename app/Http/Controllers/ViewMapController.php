@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataLokasi;
 use App\Models\User;
+use App\Models\UserDetail;
 
 class ViewMapController extends Controller
 {
@@ -14,9 +15,9 @@ class ViewMapController extends Controller
 
     public function getMarkLokasi()
     {
-        $lokasi = DataLokasi::all();
-        // $anggota = User::where('id', '!=', 1)->get()->toArray();
+        // $lokasi = DataLokasi::all();
+        $anggota = UserDetail::with('user')->get();
 
-        return response()->json($lokasi);
+        return response()->json($anggota);
     }
 }

@@ -48,12 +48,21 @@
                                         myLayer.addData(geojson);
 
                                     data.forEach(function(item) {
-                                        //Marker Place 
-                                        var gambar = (item.gambar_lokasi) ? "<img src='data/images/"+item.gambar_lokasi+"' class='mx-auto d-block' style='width:210px;'>" : "<small>Gambar belum tersedia!!!</small>";
-                                        var tempat = L.marker([item.latitude, item.longitude]).addTo(map)
-                                            .bindPopup(item.nama_lokasi + "<br>" + gambar);
-                                        L.layerGroup([tempat]);
+                                        //Marker Members
+                                        var gambar = (item.user.avatar) ? "<img src='data/foto/"+item.user.avatar+"' class='mx-auto d-block' style='width:210px;'>" : "<small>Gambar belum tersedia!!!</small>";
+                                        var anggota = L.marker([item.latitude, item.longitude]).addTo(map)
+                                            .bindPopup(item.user.nama_lengkap + "<br>" + gambar);
+                                        L.layerGroup([anggota]);
                                     });
+
+                                    //Info Tempat
+                                    // data.forEach(function(item) {
+                                    //     //Marker Place 
+                                    //     var gambar = (item.gambar_lokasi) ? "<img src='data/images/"+item.gambar_lokasi+"' class='mx-auto d-block' style='width:210px;'>" : "<small>Gambar belum tersedia!!!</small>";
+                                    //     var tempat = L.marker([item.latitude, item.longitude]).addTo(map)
+                                    //         .bindPopup(item.nama_lokasi + "<br>" + gambar);
+                                    //     L.layerGroup([tempat]);
+                                    // });
                                 },
                                 error: function(error) {
                                     console.error("Terjadi kesalahan saat mengambil data: " + error);

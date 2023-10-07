@@ -53,8 +53,8 @@
                                         {data: 'foto', name: 'foto'},
                                         {data: 'nama', name: 'nama'},
                                         {data: 'alamat', name: 'alamat'},
-                                        {data: 'latitude', name: 'latitude'},
-                                        {data: 'longitude', name: 'longitude'},
+                                        {data: 'tipe_anggota', name: 'tipe_anggota'},
+                                        {data: 'jabatan_anggota', name: 'jabatan_anggota'},
                                         {
                                             data: 'aksi',
                                             name: 'aksi',

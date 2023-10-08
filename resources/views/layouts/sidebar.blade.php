@@ -30,7 +30,7 @@
 
             <li class="sidebar-item {{Route::is('peta') ? " active" : "" }}">
                 <a class="sidebar-link" href="{{route('peta')}}">
-                    <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
+                    <i class="align-middle" data-feather="map"></i> <span class="align-middle">Peta</span>
                 </a>
             </li>
 

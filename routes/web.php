@@ -31,7 +31,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/get-lokasi', [ViewMapController::class, 'getMarkLokasi']);
+    Route::get('/get-marker', [ViewMapController::class, 'getMarker']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::resource('/data-lokasi', DataLokasiController::class);
     Route::resource('/data-anggota', AnggotaController::class);

@@ -10,14 +10,38 @@ class ViewMapController extends Controller
 {
     public function index()
     {
-        return view('view-map');
+        $anggota = new UserDetail();
+        $lokasi = new DataLokasi();
+        $data = [
+            'jmlPersis' => $anggota->jumlahOrang('persis'),
+            'jmlPersistri' => $anggota->jumlahOrang('persistri'),
+            'jmlPemuda' => $anggota->jumlahOrang('pemuda'),
+            'jmlPemudi' => $anggota->jumlahOrang('pemudi'),
+            'jmlSimpatisan' => $anggota->jumlahOrang('simpatisan'),
+            'jmlLokasi' => $lokasi->get()->count()
+        ];
+        return view('view-map', compact('data'));
     }
 
-    public function getMarkLokasi()
+    // public function getMarkAnggota()
+    // {
+    //     $anggota = UserDetail::with('user')->get();
+
+    //     return response()->json($anggota);
+    // }
+
+    public function getMarker()
     {
-        // $lokasi = DataLokasi::all();
+        $lokasi = DataLokasi::all();
         $anggota = UserDetail::with('user')->get();
 
-        return response()->json($anggota);
+        $data = [
+            'lokasi' => $lokasi,
+            'anggota' => $anggota
+        ];
+
+        $json = json_encode($data);
+
+        return response()->json($json);
     }
 }

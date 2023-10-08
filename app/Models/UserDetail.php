@@ -42,4 +42,9 @@ class UserDetail extends Model
     {
         return $this->belongsTo(DataLokasi::class, 'id_lokasi', 'id');
     }
+
+    public static function jumlahOrang($tipe)
+    {
+        return UserDetail::where('tipe_anggota', $tipe)->where('latitude', '!=', 0)->where('longitude', '!=', 0)->get()->count();
+    }
 }

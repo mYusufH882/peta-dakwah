@@ -17,8 +17,8 @@ class AnggotaController extends Controller
      */
     public function index(Request $request)
     {
+        $anggota = UserDetail::get();
         if ($request->ajax()) {
-            $anggota = UserDetail::get();
             return DataTables::of($anggota)
                 ->addIndexColumn()
                 ->addColumn('tipe', function ($row) {
@@ -26,17 +26,25 @@ class AnggotaController extends Controller
                     return $tipe;
                 })
                 ->addColumn('foto', function ($row) {
-                    $image = ($row->user->avatar != null) ? "<img src=" . asset('foto/' . $row->user->avatar) . " style='width:160px;'>" : "Belum tersedia!!!";
+                    $image = ($row->user->avatar != null) ? "<img src=" . asset('foto/' . $row->user->avatar) . " style='width:120px;'>" : "Belum tersedia!!!";
                     return $image;
                 })
                 ->addColumn('nama', function ($row) {
                     return $row->user->nama_lengkap;
                 })
+                ->addColumn('alamat', function ($row) {
+                    $titik = ($row->latitude == 0 || $row->longitude == 0) ? "<span class='text-danger text-bold'>Titik lokasi masih kosong!!!</span>" : "";
+                    return $titik . "<br/>" . $row->alamat;
+                })
+                ->addColumn('tipe_jabatan', function ($row) {
+                    $jabatan = ($row->jabatan_anggota != null) ? $row->jabatan_anggota : "";
+                    return ucfirst($row->tipe_anggota) . "<br/> (<b>" . $jabatan . "</b>)";
+                })
                 ->addColumn('aksi', function ($row) {
                     $actionBtn = '<a href="' . route('data-anggota.edit', $row->id) . '" class="edit btn btn-warning text-light btn-sm">Ubah</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="' . $row->id . '">Hapus</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['foto', 'nama', 'aksi'])
+                ->rawColumns(['foto', 'nama', 'alamat', 'tipe_jabatan', 'aksi'])
                 ->make(true);
         }
 
@@ -171,7 +179,7 @@ class AnggotaController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'name' => strtolower(trim($request->nama_lengkap)),
             'email' => $request->email,
-            'avatar' => ($request->hasFile('avatar')) ? $namaGambar : '',
+            'avatar' => ($request->hasFile('avatar')) ? $namaGambar : $user->avatar,
             'password' => bcrypt('12345678')
         ]);
 

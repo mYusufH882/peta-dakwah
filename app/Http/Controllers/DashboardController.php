@@ -11,10 +11,8 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+        $anggota = UserDetail::get();
         if ($request->ajax()) {
-            // $lokasi = DataLokasi::get();
-            $anggota = UserDetail::with('user')->get();
-
             return DataTables::of($anggota)
                 ->addIndexColumn()
                 ->addColumn('nama_lengkap', function ($row) {
@@ -43,6 +41,14 @@ class DashboardController extends Controller
                 ->make(true);
         }
 
-        return view('dashboard');
+        $data = [
+            'jmlPersis' => UserDetail::jumlahOrang('persis'),
+            'jmlPersistri' => UserDetail::jumlahOrang('persistri'),
+            'jmlPemuda' => UserDetail::jumlahOrang('pemuda'),
+            'jmlPemudi' => UserDetail::jumlahOrang('pemudi'),
+            'jmlSimpatisan' => UserDetail::jumlahOrang('simpatisan'),
+        ];
+
+        return view('dashboard', compact('data'));
     }
 }

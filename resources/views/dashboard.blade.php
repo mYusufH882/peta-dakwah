@@ -93,6 +93,53 @@
                     <div class="card-body d-flex w-100">
                         <div class="align-self-center chart chart-lg">
                             <canvas id="chartjs-dashboard-bar"></canvas>
+                            <!-- Chart Bar -->
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    // Bar chart
+                                    const labels = ['Persis', 'Persistri', 'Pemuda', 'Pemudi', 'Simpatisan'];
+                                    new Chart(document.getElementById("chartjs-dashboard-bar"), {
+                                        type: "bar",
+                                        data: {
+                                            labels: labels,
+                                            datasets: [{
+                                                label: "Jumlah",
+                                                data: [<?= $data['jmlPersis'] ?>, <?= $data['jmlPersistri'] ?>, <?= $data['jmlPemuda'] ?>, <?= $data['jmlPemudi'] ?>, <?= $data['jmlSimpatisan'] ?>],
+                                                backgroundColor: [
+                                                    window.theme.primary,
+                                                    window.theme.info,
+                                                    window.theme.success,
+                                                    window.theme.danger,
+                                                    window.theme.warning
+                                                ],
+                                            }]
+                                        },
+                                        options: {
+                                            maintainAspectRatio: false,
+                                            legend: {
+                                                display: false
+                                            },
+                                            scales: {
+                                                yAxes: [{
+                                                    gridLines: {
+                                                        display: false
+                                                    },
+                                                    stacked: false,
+                                                    ticks: {
+                                                        stepSize: 3
+                                                    }
+                                                }],
+                                                xAxes: [{
+                                                    stacked: false,
+                                                    gridLines: {
+                                                        color: "transparent"
+                                                    }
+                                                }]
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>

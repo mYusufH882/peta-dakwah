@@ -33,8 +33,7 @@
                                         <th>Foto</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
-                                        <th>Tipe Anggota</th>
-                                        <th>Jabatan Anggota</th>
+                                        <th>Tipe & Jabatan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -53,14 +52,8 @@
                                         {data: 'foto', name: 'foto'},
                                         {data: 'nama', name: 'nama'},
                                         {data: 'alamat', name: 'alamat'},
-                                        {data: 'tipe', name: 'tipe'},
-                                        {data: 'jabatan_anggota', name: 'jabatan_anggota'},
-                                        {
-                                            data: 'aksi',
-                                            name: 'aksi',
-                                            orderable: true, 
-                                            searchable: true
-                                        },
+                                        {data: 'tipe_jabatan', name: 'tipe_jabatan'},
+                                        {data: 'aksi', name: 'aksi'},
                                     ]
                                 });
 

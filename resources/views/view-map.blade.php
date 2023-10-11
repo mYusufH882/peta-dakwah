@@ -123,7 +123,7 @@
                                             iconSize: [30, 40], // size of the icon
                                         });
 
-                                        var gambar = (item.gambar_lokasi) ? "<img src='data/images/"+item.gambar_lokasi+"' class='mx-auto d-block' style='width:210px;'>" : "<small>Gambar belum tersedia!!!</small>";
+                                        var gambar = (item.gambar_lokasi) ? "<img src='data/images/"+item.gambar_lokasi+"' class='mx-auto d-block' style='width:210px;'>" : "<br/><small>Gambar belum tersedia!!!</small>";
                                         var tempat = L.marker([item.latitude, item.longitude], {icon: IconLocation}).addTo(map)
                                             .bindPopup("<p class='text-center'>"+item.nama_lokasi + gambar + "</p>");
                                         L.layerGroup([tempat]);

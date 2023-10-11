@@ -65,13 +65,27 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="manual">Manual Input</label>
+                                        <input type="checkbox" name="manual" id="manual"> <br>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#manual").click(() => {
+                                                    if ($("#manual").prop("checked")) {
+                                                        $(".inlatlong").prop("readonly", false);
+                                                    } else {
+                                                        $(".inlatlong").prop("readonly", true);
+                                                    }
+                                                });
+                                            });
+                                        </script>
                                         <label for="latitude">Latitude</label>
-                                        <input type="text" name="latitude" id="latitude" class="form-control" readonly>
+                                        <input type="text" name="latitude" id="latitude" class="form-control inlatlong"
+                                            readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="longitude">Longitude</label>
-                                        <input type="text" name="longitude" id="longitude" class="form-control"
-                                            readonly>
+                                        <input type="text" name="longitude" id="longitude"
+                                            class="form-control inlatlong" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

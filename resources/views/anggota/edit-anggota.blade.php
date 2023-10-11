@@ -71,23 +71,36 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="manual">Manual Input</label>
+                                        <input type="checkbox" name="manual" id="manual"> <br>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#manual").click(() => {
+                                                    if ($("#manual").prop("checked")) {
+                                                        $(".inlatlong").prop("readonly", false);
+                                                    } else {
+                                                        $(".inlatlong").prop("readonly", true);
+                                                    }
+                                                });
+                                            });
+                                        </script>
                                         <label for="latitude">Latitude</label>
                                         <input type="text" name="latitude" id="latitude" value="{{$anggota->latitude}}"
-                                            class="form-control" readonly>
+                                            class="form-control inlatlong" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="longitude">Longitude</label>
                                         <input type="text" name="longitude" id="longitude"
-                                            value="{{$anggota->longitude}}" class="form-control" readonly>
+                                            value="{{$anggota->longitude}}" class="form-control inlatlong" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div id="peta" style="height: 650px;" class="mb-3"></div>
+                                    <div id="peta" style="height: 850px;" class="mb-3"></div>
                                     <script type="text/javascript">
                                         var map = L.map('peta');
                                         var lat = '{{($anggota->latitude != 0) ? $anggota->latitude : env('LATITUDE')}}';
                                         var lng = '{{($anggota->longitude != 0) ? $anggota->longitude : env('LONGITUDE')}}';
-console.log(lat)
+
                                         map.setView([lat, lng], 16);
                                         map.locate({setView: true, maxZoom: 20});
                                         L.marker([lat, lng]).addTo(map);
